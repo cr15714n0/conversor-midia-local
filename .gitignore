@@ -1,0 +1,20 @@
+# Dados locais e arquivos enviados/convertidos
+data/
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.tar
+
+# Logs do sistema
+*.log
+.system_generated/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db

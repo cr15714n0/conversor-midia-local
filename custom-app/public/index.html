@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conversor de Mídia Local | Rápido & Privado</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #0c0b10;
+      background-image: 
+        radial-gradient(ellipse 90% 45% at 50% -15%, rgba(245, 158, 11, 0.12), transparent 70%),
+        radial-gradient(ellipse 50% 25% at 85% 15%, rgba(234, 88, 12, 0.08), transparent 60%);
+      background-attachment: fixed;
+    }
+    .cozy-card {
+      background: rgba(20, 19, 28, 0.75);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .pill-btn {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pill-btn.active {
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.25));
+      border-color: #f59e0b;
+      color: #fbbf24;
+      box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.35);
+    }
+    .btn-gradient {
+      background: linear-gradient(135deg, #f59e0b, #ea580c);
+      box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.35);
+      transition: all 0.25s ease;
+    }
+    .btn-gradient:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -4px rgba(245, 158, 11, 0.5);
+      filter: brightness(1.08);
+    }
+    .progress-fill {
+      background: linear-gradient(90deg, #f59e0b, #10b981);
+      transition: width 0.3s ease-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-neutral-200 flex flex-col justify-between p-4 sm:p-6 md:p-8">
+
+  <!-- Header -->
+  <header class="w-full max-w-4xl mx-auto flex items-center justify-between py-2">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-amber-500 to-orange-500 flex items-center justify-center text-white shadow-lg shadow-amber-500/25">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+      </div>
+      <div>
+        <h1 class="text-base sm:text-lg font-bold text-white tracking-tight leading-none">Studio de Conversão</h1>
+        <p class="text-[11px] text-neutral-400 mt-0.5">Vídeos & Imagens sem complicação</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        100% Offline • Sem Limites
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="w-full max-w-2xl mx-auto my-auto py-8">
+    
+    <!-- State 1: Dropzone -->
+    <div id="dropzone-section" class="cozy-card rounded-3xl p-8 sm:p-12 text-center border-2 border-dashed border-amber-500/30 hover:border-amber-400/80 transition-all cursor-pointer relative group shadow-2xl">
+      <input type="file" id="file-input" class="absolute inset-0 size-full opacity-0 cursor-pointer z-10" />
+      
+      <div class="w-20 h-20 mx-auto rounded-3xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 group-hover:bg-amber-500/15 transition-all shadow-xl shadow-amber-500/5">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+      </div>
+
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2 tracking-tight">Arraste seus arquivos aqui</h2>
+      <p class="text-neutral-400 text-sm sm:text-base max-w-md mx-auto mb-6">ou clique para escolher do seu computador</p>
+
+      <button type="button" class="btn-gradient px-6 py-3 rounded-2xl font-bold text-white text-sm inline-flex items-center gap-2 pointer-events-none mb-8">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        Escolher do Computador
+      </button>
+
+      <div class="pt-6 border-t border-white/5 flex flex-wrap justify-center items-center gap-2 text-xs text-neutral-400">
+        <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5">🎬 MP4, MOV, MKV, WebM</span>
+        <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5">🖼️ PNG, JPG, WebP, SVG, HEIC</span>
+        <span class="px-2.5 py-1 rounded-full bg-white/5 border border-white/5">🎵 MP3, WAV</span>
+      </div>
+    </div>
+
+    <!-- State 2: Selected File & Format Card -->
+    <div id="file-card-section" class="cozy-card rounded-3xl p-6 sm:p-8 shadow-2xl hidden">
+      <!-- File Header -->
+      <div class="flex items-start justify-between gap-4 pb-6 border-b border-white/5">
+        <div class="flex items-center gap-4">
+          <div id="media-preview" class="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl overflow-hidden shrink-0">
+            📁
+          </div>
+          <div>
+            <div class="flex items-center gap-2">
+              <span id="file-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase tracking-wider">VÍDEO</span>
+              <span id="file-size" class="text-xs text-neutral-400 font-medium">24 MB</span>
+            </div>
+            <h3 id="file-name" class="text-lg font-bold text-white truncate max-w-[260px] sm:max-w-[360px] mt-1">arquivo.mp4</h3>
+          </div>
+        </div>
+        <button id="btn-cancel" class="text-neutral-400 hover:text-red-400 p-2 rounded-xl hover:bg-white/5 transition-colors" title="Remover">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Format Selection -->
+      <div id="format-selection" class="py-6">
+        <p class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3 flex items-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          Escolha o Formato de Destino:
+        </p>
+        <div id="pills-container" class="flex flex-wrap gap-2.5">
+          <!-- Dynamically inserted pills -->
+        </div>
+      </div>
+
+      <!-- Conversion Progress Area (Hidden initially) -->
+      <div id="progress-area" class="py-6 border-t border-white/5 hidden">
+        <div class="flex justify-between items-center mb-2 text-sm font-semibold">
+          <span id="progress-label" class="text-neutral-300 animate-pulse flex items-center gap-2">
+            <svg class="w-4 h-4 text-amber-500 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            Convertendo...
+          </span>
+          <span id="progress-percentage" class="text-amber-400 font-bold text-base">0%</span>
+        </div>
+        <div class="w-full bg-white/5 rounded-full h-3 overflow-hidden border border-white/10 p-0.5">
+          <div id="progress-bar" class="progress-fill h-full rounded-full w-0"></div>
+        </div>
+        <div class="flex justify-between items-center text-xs text-neutral-400 mt-2 font-medium">
+          <span id="progress-speed">Calculando velocidade...</span>
+          <span id="progress-eta">Aguarde...</span>
+        </div>
+      </div>
+
+      <!-- Result Area (Hidden initially) -->
+      <div id="result-area" class="py-6 border-t border-white/5 hidden text-center">
+        <div class="w-14 h-14 mx-auto rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-2xl mb-3 shadow-lg shadow-emerald-500/20">
+          ✔
+        </div>
+        <h4 class="text-xl font-bold text-white mb-1">Conversão Concluída!</h4>
+        <p id="result-details" class="text-sm text-neutral-400 mb-6">Seu arquivo está pronto para download.</p>
+        
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a id="btn-download" href="#" class="btn-gradient px-8 py-3.5 rounded-2xl font-bold text-white text-base inline-flex items-center justify-center gap-2 shadow-xl shadow-amber-500/20">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            Baixar Arquivo
+          </a>
+          <button id="btn-new" class="px-6 py-3.5 rounded-2xl font-semibold text-neutral-300 hover:text-white bg-white/5 hover:bg-white/10 border border-white/10 transition-colors">
+            Converter Outro
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Action -->
+      <div id="action-area" class="pt-6 border-t border-white/5 flex gap-3">
+        <button id="btn-start" class="w-full btn-gradient py-4 rounded-2xl font-extrabold text-white text-base flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
+          Iniciar Conversão
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full max-w-4xl mx-auto text-center text-xs text-neutral-500 py-4">
+    Conversões executadas localmente pelo seu computador • Privacidade absoluta
+  </footer>
+
+  <script>
+    const VIDEO_EXTS = ["mp4", "mov", "mkv", "webm", "avi", "flv", "m4v", "wmv", "3gp"];
+    const IMAGE_EXTS = ["png", "jpg", "jpeg", "webp", "gif", "svg", "bmp", "tiff", "heic", "avif"];
+    const AUDIO_EXTS = ["mp3", "wav", "flac", "ogg", "m4a", "aac"];
+
+    const dropzoneSection = document.getElementById("dropzone-section");
+    const fileCardSection = document.getElementById("file-card-section");
+    const fileInput = document.getElementById("file-input");
+    const fileName = document.getElementById("file-name");
+    const fileSize = document.getElementById("file-size");
+    const fileBadge = document.getElementById("file-badge");
+    const mediaPreview = document.getElementById("media-preview");
+    const pillsContainer = document.getElementById("pills-container");
+    const btnCancel = document.getElementById("btn-cancel");
+    const btnStart = document.getElementById("btn-start");
+    const formatSelection = document.getElementById("format-selection");
+    const actionArea = document.getElementById("action-area");
+    const progressArea = document.getElementById("progress-area");
+    const progressBar = document.getElementById("progress-bar");
+    const progressPercentage = document.getElementById("progress-percentage");
+    const progressSpeed = document.getElementById("progress-speed");
+    const progressEta = document.getElementById("progress-eta");
+    const resultArea = document.getElementById("result-area");
+    const resultDetails = document.getElementById("result-details");
+    const btnDownload = document.getElementById("btn-download");
+    const btnNew = document.getElementById("btn-new");
+
+    let currentFile = null;
+    let selectedFormat = "mp4";
+    let pollInterval = null;
+
+    function formatBytes(bytes) {
+      if (!bytes) return "0 B";
+      const k = 1024;
+      const sizes = ["B", "KB", "MB", "GB"];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
+    }
+
+    // Drag and drop events
+    dropzoneSection.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropzoneSection.classList.add("border-amber-400", "bg-amber-500/5");
+    });
+    dropzoneSection.addEventListener("dragleave", () => {
+      dropzoneSection.classList.remove("border-amber-400", "bg-amber-500/5");
+    });
+    dropzoneSection.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropzoneSection.classList.remove("border-amber-400", "bg-amber-500/5");
+      if (e.dataTransfer.files?.length) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files?.length) {
+        handleFileSelect(e.target.files[0]);
+      }
+    });
+
+    function handleFileSelect(file) {
+      currentFile = file;
+      const ext = file.name.includes(".") ? file.name.split(".").pop().toLowerCase() : "";
+      
+      fileName.textContent = file.name;
+      fileSize.textContent = formatBytes(file.size);
+
+      // Category detection
+      let formats = [];
+      if (VIDEO_EXTS.includes(ext)) {
+        fileBadge.textContent = "🎬 VÍDEO";
+        fileBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 uppercase tracking-wider";
+        mediaPreview.innerHTML = "🎬";
+        formats = [
+          { ext: "mp4", label: "MP4", badge: "Recomendado" },
+          { ext: "webm", label: "WebM", badge: "Leve" },
+          { ext: "mkv", label: "MKV", badge: "HD" },
+          { ext: "avi", label: "AVI", badge: "" },
+          { ext: "mov", label: "MOV", badge: "" },
+          { ext: "gif", label: "GIF Animado", badge: "" },
+          { ext: "mp3", label: "Extrair MP3", badge: "Áudio" },
+          { ext: "wav", label: "Extrair WAV", badge: "Áudio" }
+        ];
+        selectedFormat = "mp4";
+      } else if (IMAGE_EXTS.includes(ext)) {
+        fileBadge.textContent = "🖼️ IMAGEM";
+        fileBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider";
+        // Create thumbnail preview if image
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.className = "w-full h-full object-cover";
+        mediaPreview.innerHTML = "";
+        mediaPreview.appendChild(img);
+        formats = [
+          { ext: "webp", label: "WebP", badge: "Recomendado" },
+          { ext: "png", label: "PNG", badge: "Sem Perdas" },
+          { ext: "jpg", label: "JPG", badge: "Fotos" },
+          { ext: "svg", label: "SVG", badge: "Vetor" },
+          { ext: "ico", label: "ICO", badge: "Ícone" },
+          { ext: "pdf", label: "PDF", badge: "Documento" }
+        ];
+        selectedFormat = "webp";
+      } else if (AUDIO_EXTS.includes(ext)) {
+        fileBadge.textContent = "🎵 ÁUDIO";
+        fileBadge.className = "px-2 py-0.5 rounded-full text-[10px] font-bold bg-violet-500/20 text-violet-400 border border-violet-500/30 uppercase tracking-wider";
+        mediaPreview.innerHTML = "🎵";
+        formats = [
+          { ext: "mp3", label: "MP3", badge: "Universal" },
+          { ext: "wav", label: "WAV", badge: "Estúdio" },
+          { ext: "m4a", label: "M4A", badge: "Apple" },
+          { ext: "flac", label: "FLAC", badge: "Hi-Fi" }
+        ];
+        selectedFormat = "mp3";
+      } else {
+        fileBadge.textContent = "DOCUMENTO";
+        mediaPreview.innerHTML = "📄";
+        formats = [
+          { ext: "pdf", label: "PDF", badge: "" },
+          { ext: "txt", label: "TXT", badge: "" }
+        ];
+        selectedFormat = "pdf";
+      }
+
+      // Render Format Pills
+      pillsContainer.innerHTML = "";
+      formats.forEach((fmt, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = `pill-btn px-4 py-2 rounded-xl border text-sm font-semibold flex items-center gap-1.5 ${index === 0 ? "active" : "border-white/10 bg-white/5 text-neutral-300 hover:border-amber-500/50 hover:bg-white/10"}`;
+        btn.innerHTML = `
+          <span>${fmt.label}</span>
+          ${fmt.badge ? `<span class="text-[10px] px-1.5 py-0.5 rounded-md bg-amber-500/20 text-amber-300 font-bold uppercase">${fmt.badge}</span>` : ""}
+        `;
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".pill-btn").forEach(p => p.classList.remove("active"));
+          btn.classList.add("active");
+          selectedFormat = fmt.ext;
+        });
+        pillsContainer.appendChild(btn);
+      });
+
+      // Switch view
+      dropzoneSection.classList.add("hidden");
+      fileCardSection.classList.remove("hidden");
+      formatSelection.classList.remove("hidden");
+      actionArea.classList.remove("hidden");
+      progressArea.classList.add("hidden");
+      resultArea.classList.add("hidden");
+    }
+
+    // Cancel / New conversion
+    btnCancel.addEventListener("click", resetView);
+    btnNew.addEventListener("click", resetView);
+
+    function resetView() {
+      if (pollInterval) clearInterval(pollInterval);
+      currentFile = null;
+      fileInput.value = "";
+      dropzoneSection.classList.remove("hidden");
+      fileCardSection.classList.add("hidden");
+    }
+
+    // Start conversion
+    btnStart.addEventListener("click", async () => {
+      if (!currentFile) return;
+
+      formatSelection.classList.add("hidden");
+      actionArea.classList.add("hidden");
+      progressArea.classList.remove("hidden");
+      progressBar.style.width = "5%";
+      progressPercentage.textContent = "Iniciando...";
+      progressSpeed.textContent = "Preparando motor de conversão...";
+      progressEta.textContent = "";
+
+      const formData = new FormData();
+      formData.append("file", currentFile);
+      formData.append("format", selectedFormat);
+
+      try {
+        const res = await fetch("/api/convert", {
+          method: "POST",
+          body: formData
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        // Start polling progress
+        const jobId = data.id;
+        pollInterval = setInterval(async () => {
+          try {
+            const pRes = await fetch(`/api/progress/${jobId}`);
+            const pData = await pRes.json();
+
+            if (pData.status === "converting") {
+              const pct = pData.percent || 10;
+              progressBar.style.width = `${pct}%`;
+              progressPercentage.textContent = `${pct}%`;
+              progressSpeed.textContent = pData.speed ? `Velocidade: ${pData.speed}` : "Processando...";
+              progressEta.textContent = pData.eta ? `Tempo restante: ~${pData.eta}` : "";
+            } else if (pData.status === "done") {
+              clearInterval(pollInterval);
+              progressBar.style.width = "100%";
+              progressPercentage.textContent = "100%";
+              setTimeout(() => {
+                showResult(jobId, pData.outFileName, pData.outSize);
+              }, 400);
+            } else if (pData.status === "error") {
+              clearInterval(pollInterval);
+              alert(pData.error || "Ocorreu um erro durante a conversão.");
+              resetView();
+            }
+          } catch (e) {
+            console.error("Poll error:", e);
+          }
+        }, 600);
+
+      } catch (err) {
+        alert("Erro ao iniciar conversão: " + err.message);
+        resetView();
+      }
+    });
+
+    function showResult(jobId, outFileName, outSize) {
+      progressArea.classList.add("hidden");
+      resultArea.classList.remove("hidden");
+      resultDetails.textContent = `${outFileName} • ${formatBytes(outSize)}`;
+      btnDownload.href = `/api/download/${jobId}`;
+      btnDownload.setAttribute("download", outFileName);
+    }
+  </script>
+</body>
+</html>

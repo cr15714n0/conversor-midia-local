@@ -1,0 +1,11 @@
+services:
+  conversor:
+    image: ghcr.io/c4illin/convertx:latest
+    container_name: conversor-midia
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/app/data
+      - ./custom-app:/app/custom-app
+    command: bun /app/custom-app/server.js
